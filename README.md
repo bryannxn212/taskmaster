@@ -85,13 +85,17 @@ The storage file is created automatically on first write.
 
 | Field       | Type         | Description                                              |
 |-------------|--------------|----------------------------------------------------------|
-| `id`        | `string`     | UUID v4                                                  |
-| `agentType` | `string`     | Agent category, e.g. `planning`, `implementation`        |
-| `agentId`   | `string?`    | Optional identifier of the specific agent instance       |
-| `status`    | `TaskStatus` | `pending` \| `in_progress` \| `completed` \| `cancelled` |
-| `notes`     | `string?`    | Optional free-text notes                                 |
-| `createdAt` | `string`     | ISO 8601 timestamp                                       |
-| `updatedAt` | `string`     | ISO 8601 timestamp                                       |
+| `id`                | `string`     | UUID v4                                                  |
+| `agentType`         | `string`     | Agent category, e.g. `planning`, `implementation`        |
+| `agentId`           | `string?`    | Optional identifier of the specific agent instance       |
+| `status`            | `TaskStatus` | `pending` \| `in_progress` \| `completed` \| `cancelled` |
+| `goal`              | `string?`    | What the agent is trying to achieve                      |
+| `constraints`       | `string?`    | Boundaries or restrictions the agent must respect        |
+| `outputFormat`      | `string?`    | Expected shape or format of the agent's output           |
+| `failureConditions` | `string?`    | Conditions that constitute failure for this subtask      |
+| `notes`             | `string?`    | Optional free-text notes                                 |
+| `createdAt`         | `string`     | ISO 8601 timestamp                                       |
+| `updatedAt`         | `string`     | ISO 8601 timestamp                                       |
 
 ---
 
@@ -473,11 +477,15 @@ Add a subtask to a task.
 
 **Request body:**
 
-| Field       | Type     | Required | Description       |
-|-------------|----------|----------|-------------------|
-| `agentType` | `string` | Yes      | Agent category    |
-| `agentId`   | `string` | No       | Agent instance ID |
-| `notes`     | `string` | No       | Initial notes     |
+| Field               | Type     | Required | Description                              |
+|---------------------|----------|----------|------------------------------------------|
+| `agentType`         | `string` | Yes      | Agent category                           |
+| `agentId`           | `string` | No       | Agent instance ID                        |
+| `goal`              | `string` | No       | What the agent is trying to achieve      |
+| `constraints`       | `string` | No       | Boundaries the agent must respect        |
+| `outputFormat`      | `string` | No       | Expected shape or format of the output   |
+| `failureConditions` | `string` | No       | Conditions that constitute failure       |
+| `notes`             | `string` | No       | Initial notes                            |
 
 **Response:** `201 Created` — the created `SubTask` object, or `404` if task not found.
 
@@ -489,11 +497,15 @@ Update a subtask.
 
 **Request body:**
 
-| Field     | Type         | Description    |
-|-----------|--------------|----------------|
-| `status`  | `TaskStatus` | New status     |
-| `agentId` | `string`     | New agent ID   |
-| `notes`   | `string`     | New notes      |
+| Field               | Type         | Description                        |
+|---------------------|--------------|------------------------------------|
+| `status`            | `TaskStatus` | New status                         |
+| `agentId`           | `string`     | New agent ID                       |
+| `goal`              | `string`     | New goal                           |
+| `constraints`       | `string`     | New constraints                    |
+| `outputFormat`      | `string`     | New output format                  |
+| `failureConditions` | `string`     | New failure conditions             |
+| `notes`             | `string`     | New notes                          |
 
 **Response:** `200 OK` — the updated `SubTask` object, or `404` if task or subtask not found.
 

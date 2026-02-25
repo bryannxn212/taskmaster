@@ -6,6 +6,10 @@ export interface SubTask {
   agentType: AgentType;
   agentId?: string;
   status: TaskStatus;
+  goal?: string;
+  constraints?: string;
+  outputFormat?: string;
+  failureConditions?: string;
   notes?: string;
   createdAt: string;
   updatedAt: string;
@@ -45,12 +49,20 @@ export interface UpdateTaskInput {
 export interface CreateSubTaskInput {
   agentType: AgentType;
   agentId?: string;
+  goal?: string;
+  constraints?: string;
+  outputFormat?: string;
+  failureConditions?: string;
   notes?: string;
 }
 
 export interface UpdateSubTaskInput {
   status?: TaskStatus;
   agentId?: string;
+  goal?: string;
+  constraints?: string;
+  outputFormat?: string;
+  failureConditions?: string;
   notes?: string;
 }
 

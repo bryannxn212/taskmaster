@@ -106,6 +106,10 @@ export function addSubTask(taskId: string, input: CreateSubTaskInput): Result<Su
       agentType: input.agentType,
       agentId: input.agentId,
       status: 'pending',
+      goal: input.goal,
+      constraints: input.constraints,
+      outputFormat: input.outputFormat,
+      failureConditions: input.failureConditions,
       notes: input.notes,
       createdAt: now(),
       updatedAt: now(),
@@ -132,6 +136,10 @@ export function updateSubTask(
     }
     if (input.status !== undefined) subtask.status = input.status;
     if (input.agentId !== undefined) subtask.agentId = input.agentId;
+    if (input.goal !== undefined) subtask.goal = input.goal;
+    if (input.constraints !== undefined) subtask.constraints = input.constraints;
+    if (input.outputFormat !== undefined) subtask.outputFormat = input.outputFormat;
+    if (input.failureConditions !== undefined) subtask.failureConditions = input.failureConditions;
     if (input.notes !== undefined) subtask.notes = input.notes;
     subtask.updatedAt = now();
     task.updatedAt = now();
